@@ -45,7 +45,7 @@ h1
     border: #0163C3;
 }
 
-section 
+body > main > section 
 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -261,4 +261,158 @@ a
     background-color: #834013;
 }
 
+
+/********************************************************************
+        ROUND ONE UI
+********************************************************************/
+#roundOne > main, #roundTwo > main, #suddenDeath > main
+{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    column-gap: 20px;
+}
+
+#moneyTreeContainer
+{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 15px;
+    margin-top: 30px;
+}
+
+#displayQnAContainer
+{
+    display: grid;
+    grid-template-rows: 4fr 1fr 1fr 1fr 1fr .5fr;
+    row-gap: 5px;
+    width: 100%;
+    justify-items: center;
+    color: white;
+    font-size: 3rem;
+}
+
+.moneyTreeValueDisplay /* Money Tree Display Values re: Button */
+{
+    background-color:#0163C3;
+    border: 10px solid var(--all-text);
+    padding: 15px 50px;
+    border-radius: 50%;
+    margin: 0 30px;
+    color: var(--all-text);
+    font-size: 1.5rem;
+}
+
+#bankedAmount
+{
+    background-color:#081427;
+    border: 5px solid #0163C3;
+    border-radius: 50%;
+    padding: 5px;
+    margin-top: 25px;
+    font-size: 3rem;
+    color: #FFD43B;
+}
+
+#bankButton:hover
+{
+    border: 5px solid #a3ddcb;
+    background-color:#a3ddcb;
+    color: #ffe3de;
+}
+
+#displayQuestion
+{
+    margin: auto auto;
+    font-size: 4rem;
+}
+
+.displayAnswers
+{
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.displayAnswers:hover
+{
+    background-color: #a3ddcb;
+}
+
+#bankedButton, #nextQuestion
+{
+    padding: 30px 150px;
+    background-color:#0163C3;
+    border: 2px solid #5A82B2;
+    border-radius: 15px;
+    font-size: 2rem;
+    width: inherit;
+}
+
+#bankedButton:hover, #nextQuestion:hover
+{
+    background-color: #237020;
+}
+
+/********************************************************************
+        ROUND TWO UI
+********************************************************************/
+#roundTwo > main > #moneyTreeContainer
+{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+    row-gap: 15px;
+    margin-top: 30px;
+}
+
+/********************************************************************
+        Sudden Death UI
+********************************************************************/
+#moneyTreeContainer
+{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr; 
+    row-gap: 15px;
+    margin-top: 30px;
+}
+
+.suddenDeathLifeLines
+{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;   
+    border: 3px solid #031c41;
+    border-radius: 25%;
+
+}
+
+.suddenDeathLifeLines:hover
+{
+    background-color:#0163C3;
+}
+#lifeLineOne
+{
+    background-image: url(../img/Classic5050.png);
+}
+
+#lifeLineTwo
+{
+    background-image: url(../img/ClassicPAF.png);
+}
+
+#lifeLineThree
+{
+    background-image: url(../img/ClassicATA.png);
+}
+
+#suddenDeath > main > #displayQnAContainer
+{
+    display: grid;
+    grid-template-rows: 4fr 1fr 1fr 1fr 1fr;
+    row-gap: 5px;
+    justify-items: center;
+    height: 90vh;
+    color: white;
+    font-size: 3rem;
+
+}
 

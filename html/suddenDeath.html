@@ -8,20 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/fc385cc442.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style.css">
-    <title> The Weakest Link || Round One </title>
+    <title> The Weakest Link || Sudden Death </title>
 </head>
-<body id="roundOne">
+<body id="suddenDeath">
     <main> 
         <div id="moneyTreeContainer">
-            <button class="moneyTreeValueDisplay" type="button" id="moneyTreePosition1">$500,000</button>
-            <button class="moneyTreeValueDisplay" type="button" id="moneyTreePosition2">$250,000</button>
-            <button class="moneyTreeValueDisplay" type="button" id="moneyTreePosition3">$125,000</button>
-            <button class="moneyTreeValueDisplay" type="button" id="moneyTreePosition4">$75,000</button>
-            <button class="moneyTreeValueDisplay" type="button" id="moneyTreePosition5">$50,000</button>
-            <button class="moneyTreeValueDisplay" type="button" id="moneyTreePosition6">$10,000</button>
-            <button class="moneyTreeValueDisplay" type="button" id="moneyTreePosition7">$5,000</button>
-            <button class="moneyTreeValueDisplay" type="button" id="moneyTreePosition8">$1,000</button>
-            <button type="button" id="bankedAmount"> 0 </button>
+            <div class="suddenDeathLifeLines" id="lifeLineOne"></div>
+            <div class="suddenDeathLifeLines" id="lifeLineTwo"></div>
+            <div class="suddenDeathLifeLines" id="lifeLineThree"></div>
+
+           <button type="button" id="bankedAmount"> 0 </button>
         </div>
         <div id="displayQnAContainer">
             <div id="displayQuestion"> Question Goes Here </div>
@@ -29,10 +25,6 @@
             <div id="answer2" class="displayAnswers"> Answer Two </div>
             <div id="answer3" class="displayAnswers"> Answer Three </div>
             <div id="answer4" class="displayAnswers"> Answer Four </div>
-            <div id="actionButtons">
-                <button type="button" id="bankedButton"> BANK </button>
-                <button type="button" id="nextQuestion"> NEXT QUESTION </button>
-            </div>
         </div>
     </main>
     <footer>
