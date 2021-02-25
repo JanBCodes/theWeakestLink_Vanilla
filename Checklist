@@ -2,17 +2,20 @@ Intro:
     Music: On/Off
     Save Function
     Load Function
-    Display Rules
-    Storage Avatar
+    Display Rules - done
+    Storage Avatar - done
+    Avatar Fail Safe Selection - done
+    Remove Avatar from Storage if Reselection  - done
 
 Logic:
+
     Rest API Fetch
     Modal Blocking re: Bank or Next
     Money Tree Climb
     Banking  Feature
     Answer Selection Verification
 
-    Round Two & Sudden Death Protectiong from Cheating
+    Round Two & Sudden Death Protection from Cheating
 
     50/50 : wo wrong answers disappear
     Phone a friend: ???

@@ -10,7 +10,7 @@ const intro =
 
         startGameButton.addEventListener(`click`, () => {
             
-            location.href = `/TheWeakestLink/html/avatarSelection.html`
+            location.href = "/TheWeakestLink/html/selectAvatar.html"
             // startGame.selectAvatar();
             console.log(`start Game`)
 

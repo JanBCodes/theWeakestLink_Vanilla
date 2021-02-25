@@ -15,23 +15,16 @@ const startGame =
 
         selectAvatarMainDContainer.addEventListener(`click`, (event) => {
 
-            // const avatarSelected = event.target;
+            const avatarSelected = (event.target).id;
 
-            // console.log(avatarSelected)
+            console.log( avatarSelected)
 
-            // sessionStorage.setItem(`Avatar Selected ID`,`${x}`)
+            location.href = `/TheWeakestLink/html/confirmAvatar.html`
 
-            // location.href = `/TheWeakestLink/confirmAvatar.html`
+            sessionStorage.setItem(`AvatarSelectedID`,`${avatarSelected}`)
+            
         })
 
-
-
-
-
-
-
-
-
-    }  //end of Main sekectAvatar
+    }  //end of Main selectAvatar
 }
 startGame.selectAvatar()
