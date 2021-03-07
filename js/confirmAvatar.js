@@ -17,7 +17,8 @@ const confirmAvatar =
 
         moveOntoRoundOne.addEventListener(`click`,() => {
 
-            location.href = `/TheWeakestLink/html/roundOne.html`
+            location.href = `/TheWeakestLink/html/startGame.html`
+            console.log(playerSelected)
 
         })
 

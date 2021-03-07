@@ -2,14 +2,9 @@ Intro:
     Music: On/Off
     Save Function
     Load Function
-    Display Rules - done
-    Storage Avatar - done
-    Avatar Fail Safe Selection - done
-    Remove Avatar from Storage if Reselection  - done
 
 Logic:
 
-    Rest API Fetch
     Modal Blocking re: Bank or Next
     Money Tree Climb
     Banking  Feature
@@ -25,3 +20,19 @@ Logic:
 
     Winner
     Loser
+
+DRY
+SOC
+    UI - done
+    BLO - to work on
+    DOA - done
+    Storage - done
+    APP - done
+
+    Rest API Fetch - done
+    Avatar Fail Safe Selection - done
+    Remove Avatar from Storage if Reselection  - done
+    Display Rules - done
+    Storage Avatar - done
+
+
