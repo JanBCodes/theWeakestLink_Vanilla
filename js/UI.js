@@ -5,13 +5,18 @@ const MainUI =
     questionQnAContainer:   document.querySelector(`#displayQnAContainer`),
     moneyTreeContainer:     document.querySelector(`#moneyTreeContainer`),
     displayAnswerContainer: document.querySelector(`#displayAnswerContainer`),
-    playerSelected:         sessionStorage.getItem(`AvatarSelectedID`),
     playerAvatarImg:        document.querySelector(`#playerSelected`),
     timer:                  document.querySelector(`#timerDisplay`),
     roundDisplay:           document.querySelector(`#roundDisplay`),
-    currentBankedAmount:    document.querySelector(`#currentBankedAmount`),    
+    currentBankedAmount:    document.querySelector(`#currentBankedAmount`),
+   
+    /*  DAO Logic
+     */
+   
+    playerImageSelected:    sessionStorage.getItem(`AvatarSelectedImage`),
 
-/*  Business Logic
+
+    /*  Business Logic
      */
     endPoint: `https://opentdb.com/api.php?amount=50&category=9&difficulty=easy&type=multiple`,
     randomQuestionNumber: Math.floor(Math.random() * 50), 
@@ -21,10 +26,13 @@ const MainUI =
     roundOneTimer: 120,
     roundTwoTimer: 90,
     currentRound: 1,
+    currentTreeIndex: 0,
+
+    correctAnswer:``,
 
     startTimer()
     {
-        let currentTimer = 4      // this.roundOneTimer; ***FIX TESTING
+        let currentTimer = 900      // this.roundOneTimer; ***FIX TESTING
 
         this.roundDisplay.innerHTML = `Round ${this.currentRound}`
 
@@ -55,33 +63,7 @@ const MainUI =
 
     displayAvatar()
     {   
-        console.log(playerSelected)
-        
-        if ( this.playerSelected == `avatar1`)
-        {
-            this.playerAvatarImg.style.backgroundImage = `url(/TheWeakestLink/img/Cindy.png)`
-        }
-        else if ( this.playerSelected  == `avatar2`)
-        {
-            this.playerAvatarImg.style.backgroundImage  = `url(/TheWeakestLink/img/Helen.png)`
-        }
-        else if ( this.playerSelected  == `avatar3`)
-        {
-            this.playerAvatarImg.style.backgroundImage  = `url(/TheWeakestLink/img/David.png)`
-        }
-        else if ( this.playerSelected  == `avatar4`)
-        {
-            this.playerAvatarImg.style.backgroundImage  = `url(/TheWeakestLink/img/Joan.png)`
-        }
-        else if ( this.playerSelected  == `avatar5`)
-        {
-            this.playerAvatarImg.style.backgroundImage  = `url(/TheWeakestLink/img/Stacy.png)`
-        }
-        else if ( this.playerSelected  == `avatar6`)
-        {
-            this.playerAvatarImg.style.backgroundImage  = `url(/TheWeakestLink/img/Tiffany.png)`
-        }
-        
+        this.playerAvatarImg.style.backgroundImage = `url(${this.playerImageSelected})`
     },
 
     populateQnA()
@@ -100,6 +82,7 @@ const MainUI =
                 incorrectAnswers: data.results[this.randomQuestionNumber].incorrect_answers //array
             }
 
+            this.correctAnswer = questionAndAnswerObj.correctAnswer
             /****************************************
             Pushing Answer to Array to be Shuffled for Random display
             *************************************** */
@@ -122,7 +105,7 @@ const MainUI =
 
             for(let i = 0; i < answers.length; i++)
             {               
-                this.displayAnswerContainer.innerHTML += `<div class="displayAnswers"> ${answers[i]} </div>`
+                this.displayAnswerContainer.innerHTML += `<div class="displayAnswers">${answers[i]}</div>`
 
             }   
 
@@ -139,35 +122,44 @@ const MainUI =
     {   
         this.moneyTreeContainer.innerHTML = ``;
 
-        console.log(`MT: ${this.currentRound}`)
-
         if(this.currentRound === 1)
-        {
-            let roundOneMoneyTree = this.roundOneMoneyTree.reverse()
-            
-            roundOneMoneyTree.forEach((index) => {
+        {           
+            this.roundOneMoneyTree.reverse().forEach((index) => {
 
                 this.moneyTreeContainer.innerHTML += `<button class="moneyTreeValueDisplay" type="button"> ${index} </button>`
-        
             })
+            
+            let moneyTreeValueDisplay = document.querySelectorAll(`.moneyTreeValueDisplay`)
+            moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `green` //**fix
+
         }
         else if(this.currentRound === 2)
         {
-            let roundTwoMoneyTree = this.roundTwoMoneyTree.reverse()
-            
-            roundTwoMoneyTree.forEach((index) => {
+           
+            this.roundTwoMoneyTree.reverse().forEach((index) => {
 
                 this.moneyTreeContainer.innerHTML += `<button class="moneyTreeValueDisplay" type="button"> ${index} </button>`
-        
+
             })
+
         }
         else if(this.currentRound === 3) // Sudden Death
          {
             this.suddenDeathRound.forEach((index) => {
 
-                this.moneyTreeContainer.innerHTML += `<div class="suddenDeathLifeLines"><img src="../img/${index}" alt=""></div>`
+                this.moneyTreeContainer.innerHTML += `<div class="suddenDeathLifeLines"><img src="../img/${index}" alt="a life line"></div>`
             })
          }
+    },
+
+    verifyAnswers()
+    {
+
+    },
+    
+    moneyTreePosition()
+    {
+
     }
 }
 

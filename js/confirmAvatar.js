@@ -6,63 +6,48 @@ const confirmAvatar =
         const moveOntoRoundOne = document.querySelector(`#Yes`)
         const returnToAvatarSel = document.querySelector(`#No`)
 
-        const playerSelected = sessionStorage.getItem(`AvatarSelectedID`)
+        const playerImageSelected = sessionStorage.getItem(`AvatarSelectedImage`)
 
-        returnToAvatarSel.addEventListener(`click`, () => {
+        console.log(playerImageSelected)
 
-            sessionStorage.removeItem(`AvatarSelectedID`)
-            location.href = `/TheWeakestLink/html/selectAvatar.html`
-
-        })
-
-        moveOntoRoundOne.addEventListener(`click`,() => {
-
-            location.href = `/TheWeakestLink/html/startGame.html`
-            console.log(playerSelected)
-
-        })
-
-
-        if ( playerSelected == `avatar1`)
+        if(playerImageSelected == `undefined`)
         {
-            avatarSelDisplayDiv.style.backgroundImage = `url(/TheWeakestLink/img/Cindy.png)`
-        }
-        else if ( playerSelected == `avatar2`)
-        {
-            avatarSelDisplayDiv.style.backgroundImage = `url(/TheWeakestLink/img/Helen.png)`
-        }
-        else if ( playerSelected == `avatar3`)
-        {
-            avatarSelDisplayDiv.style.backgroundImage = `url(/TheWeakestLink/img/David.png)`
-        }
-        else if ( playerSelected == `avatar4`)
-        {
-            avatarSelDisplayDiv.style.backgroundImage = `url(/TheWeakestLink/img/Joan.png)`
-        }
-        else if ( playerSelected == `avatar5`)
-        {
-            avatarSelDisplayDiv.style.backgroundImage = `url(/TheWeakestLink/img/Stacy.png)`
-        }
-        else if ( playerSelected == `avatar6`)
-        {
-            avatarSelDisplayDiv.style.backgroundImage = `url(/TheWeakestLink/img/Tiffany.png)`
-        }
-        else
-        {
+
+            sessionStorage.removeItem(`AvatarSelectedImage`)
+ 
             avatarSelDisplayDiv.style.backgroundImage = `url(/TheWeakestLink/img/404Error.png)`
 
             moveOntoRoundOne.addEventListener(`click`,() => {
 
                 avatarSelDisplayDiv.style.backgroundImage = `url(/TheWeakestLink/img/donkey.jpg)`
+                avatarSelDisplayDiv.innerHTML = `You need an Avatar to move on`
 
+                setTimeout(() => {
+
+                    location.href = `/TheWeakestLink/html/selectAvatar.html`
+                }, 3000)
             })
 
-            setTimeout(()=>{
+        }
+        else
+        {
+            avatarSelDisplayDiv.style.backgroundImage = `url(${playerImageSelected})`
 
-                location.href = `/TheWeakestLink/html/selectAvatar.html`
-            }, 5000)
+            moveOntoRoundOne.addEventListener(`click`,() => {
+
+                location.href = `/TheWeakestLink/html/gameScreen.html`
+    
+            })
 
         }
+
+        returnToAvatarSel.addEventListener(`click`, () => {
+
+            sessionStorage.removeItem(`AvatarSelectedImage`)
+
+            location.href = `/TheWeakestLink/html/selectAvatar.html`
+
+        })
             
     }  //end of confirmAvatar
 }
