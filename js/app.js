@@ -3,8 +3,7 @@ import MainUI from "./UI.js";
 const app =
 {
     init() 
-    {  
-        
+    {          
         MainUI.startTimer()
         MainUI.populateQnA()
         MainUI.displayAvatar()
@@ -12,44 +11,32 @@ const app =
 
         MainUI.displayAnswerContainer.addEventListener(`click`, (event) => {
 
-           const eventSelected = (event.target)
+            const eventSelected = (event.target)
             const answerSelected = eventSelected.innerHTML;
-            const answerSelectedClassName = eventSelected.className;
 
-            if(answerSelected == MainUI.correctAnswer)
+           console.log()
+
+            if(eventSelected.id == `displayAnswerContainer`)
             {
-                console.log(true)
-
+                // HTML selected - Do nothing
+                console.log(`displayAnswerContainer`)
             }
-            else if(answerSelected == answerSelected.className)
+            else if(answerSelected == MainUI.correctAnswer)
             {
+                MainUI.checkAnswers(true)// money tree climbs one
+                // Gives the options to Bank Money
+                MainUI.populateQnA() // calls new question
                 
-                console.log(`div selected`)
 
             }
-            else
+            else // Wrong Answer 
             {
-                console.log(false)
-
-
+                MainUI.checkAnswers(false)
+                MainUI.populateQnA() // calls new question
             }
-            
-            console.log(answerSelectedClassName)
-
-
-            console.log(answerSelected)
-            // console.log(MainUI.correctAnswer)
-
-
-
 
 
         })
-
-
-
-
-
 
     }//end of init
 

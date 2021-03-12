@@ -9,30 +9,27 @@ const MainUI =
     timer:                  document.querySelector(`#timerDisplay`),
     roundDisplay:           document.querySelector(`#roundDisplay`),
     currentBankedAmount:    document.querySelector(`#currentBankedAmount`),
+    moneyTreeValueDisplay:  document.getElementsByClassName(`moneyTreeValueDisplay`),
    
-    /*  DAO Logic
-     */
+    /*  DAO Logic  */
    
     playerImageSelected:    sessionStorage.getItem(`AvatarSelectedImage`),
 
-
-    /*  Business Logic
-     */
+    /*  Business Logic     */
     endPoint: `https://opentdb.com/api.php?amount=50&category=9&difficulty=easy&type=multiple`,
     randomQuestionNumber: Math.floor(Math.random() * 50), 
     roundOneMoneyTree: [0,1000,5000,10000,50000,75000,125000,250000,500000],
     roundTwoMoneyTree: [0,1000,10000,750000,125000,500000],
     suddenDeathRound: ["Classic5050.png","ClassicATA.png","ClassicPAF.png"],
-    roundOneTimer: 120,
-    roundTwoTimer: 90,
+    roundTimer: [60,60], //**fix */
     currentRound: 1,
-    currentTreeIndex: 0,
+    currentTreeIndex: ``,
 
     correctAnswer:``,
 
     startTimer()
     {
-        let currentTimer = 900      // this.roundOneTimer; ***FIX TESTING
+        let currentTimer = this.roundTimer[0];
 
         this.roundDisplay.innerHTML = `Round ${this.currentRound}`
 
@@ -42,14 +39,17 @@ const MainUI =
 
             currentTimer--;
 
-            if(this.currentRound == 1 && currentTimer == 0)
+            // console.log(currentTimer)
+            // console.log(this.currentRound)
+
+            if(this.currentRound == 1 && currentTimer == 0 || this.currentTreeIndex == -1 && this.currentRound == 1)
             {
                 this.currentRound++;
                 this.roundDisplay.innerHTML = `Round ${this.currentRound}`
-                currentTimer = 5 // this.roundTwoTimer; ***FIX TESTING 
+                currentTimer = this.roundTimer[1]
                 this.populateMoneyTree()
             }
-            else if(this.currentRound == 2 && currentTimer == 0)
+            else if(this.currentRound == 2 && currentTimer == 0 || this.currentTreeIndex == -1 && this.currentRound == 2)
             {
                 this.currentRound++;
                 this.timer.innerHTML = ``;
@@ -58,6 +58,7 @@ const MainUI =
                 this.populateMoneyTree()
                 clearInterval(ref)
             }
+
         },1000)
     },
 
@@ -69,7 +70,7 @@ const MainUI =
     populateQnA()
     {      
 
-       const newQuestion  = new RESTAPI()
+        const newQuestion  = new RESTAPI()
 
         newQuestion.getAPIData(this.endPoint)
 
@@ -87,8 +88,8 @@ const MainUI =
             Pushing Answer to Array to be Shuffled for Random display
             *************************************** */
             const answers = []
- 
-            answers.push(questionAndAnswerObj.correctAnswer) 
+
+            answers.push(questionAndAnswerObj.correctAnswer)  
             questionAndAnswerObj.incorrectAnswers.forEach((dataR) => {
 
                 answers.push(dataR)
@@ -98,15 +99,18 @@ const MainUI =
 
             console.log(questionAndAnswerObj.correctAnswer)
 
+            this.displayAnswerContainer.innerHTML = ``; //Removes Dynamic Answers Previous Created
+            this.questionQnAContainer.innerHTML = ``; //Removes Dynamic Answers Previous Created
+
+
             /****************************************
             Dynamically Displaying Q&A with API data
-            *************************************** */          
+            *************************************** */        
             this.questionQnAContainer.innerHTML = `<div id="displayQuestion"> ${questionAndAnswerObj.question} </div>`
 
             for(let i = 0; i < answers.length; i++)
             {               
                 this.displayAnswerContainer.innerHTML += `<div class="displayAnswers">${answers[i]}</div>`
-
             }   
 
         })
@@ -128,9 +132,11 @@ const MainUI =
 
                 this.moneyTreeContainer.innerHTML += `<button class="moneyTreeValueDisplay" type="button"> ${index} </button>`
             })
-            
+
+            //****************************************************************************************** */  
             let moneyTreeValueDisplay = document.querySelectorAll(`.moneyTreeValueDisplay`)
-            moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `green` //**fix
+            this.currentTreeIndex = moneyTreeValueDisplay.length-1; // = 9
+            this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `green` //**fix
 
         }
         else if(this.currentRound === 2)
@@ -142,6 +148,12 @@ const MainUI =
 
             })
 
+            //****************************************************************************************** */  
+            let moneyTreeValueDisplay = document.querySelectorAll(`.moneyTreeValueDisplay`)
+            this.currentTreeIndex = moneyTreeValueDisplay.length-1; // = 9
+            this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `green` //**fix
+
+
         }
         else if(this.currentRound === 3) // Sudden Death
          {
@@ -149,18 +161,35 @@ const MainUI =
 
                 this.moneyTreeContainer.innerHTML += `<div class="suddenDeathLifeLines"><img src="../img/${index}" alt="a life line"></div>`
             })
+
          }
     },
 
-    verifyAnswers()
-    {
+    checkAnswers(answer)
+    {     
+        this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `` //**fix
+
+        if(answer == true)
+        {
+            this.currentTreeIndex--;
+        }
+        else
+        {
+            this.currentTreeIndex = this.moneyTreeValueDisplay.length-1;
+            
+        }
+
+        this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `green` //**fix
 
     },
-    
-    moneyTreePosition()
-    {
 
+    bankedFunds()
+    {
+        let bankedFundsThisRound = this.moneyTreeValueDisplay[this.currentTreeIndex].innerHTML
+        this.currentBankedAmount.innerHTML += `Banked: ${bankedFundsThisRound}`
     }
+    
+    
 }
 
 export default MainUI;
