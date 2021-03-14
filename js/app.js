@@ -21,12 +21,11 @@ const app =
                 // HTML selected - Do nothing
                 console.log(`displayAnswerContainer`)
             }
-            else if(answerSelected == MainUI.correctAnswer)
+            else if(answerSelected == MainUI.correctAnswer) //correct answer
             {
                 MainUI.checkAnswers(true)// money tree climbs one
-                // Gives the options to Bank Money
-                MainUI.populateQnA() // calls new question
-                
+                MainUI.displayBankOption()// Gives the options to Bank Money
+                MainUI.populateQnA() // calls new question  
 
             }
             else // Wrong Answer 
@@ -34,8 +33,12 @@ const app =
                 MainUI.checkAnswers(false)
                 MainUI.populateQnA() // calls new question
             }
+        })
 
+        MainUI.bankedButton.addEventListener(`click`,(event) => {
 
+            MainUI.bankedFunds()
+            
         })
 
     }//end of init

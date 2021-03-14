@@ -334,7 +334,7 @@ a
     justify-items: center;
     color: white;
     font-size: 2rem;
-    }
+}
 
 #displayAnswerContainer
 {
@@ -381,18 +381,9 @@ a
 .hide
 {
     display: none;
-
 }
 
-.show
-{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 30px;
-    margin: 10px auto;
-    /* background-image: url(../img/WeakBrokenLink.png); */
-    /* opacity: .5; */
-}
+/* */
 
 #bankedAmount
 {
@@ -405,17 +396,18 @@ a
     color: #FFD43B;
 }
 
-#bankedButton, #nextQuestion
+#bankedButton
 {
-    padding: 30px 150px;
-    background-color:#0163C3;
-    border: 2px solid #5A82B2;
-    border-radius: 15px;
-    font-size: 2rem;
-    width: inherit;
+    margin: 50px 200px;
+    padding: 200px 150px;
+    background-color: #a7881a;
+    border: 20px solid #9ccf24;
+    border-radius: 50%;
+    align-self: center;
+    font-size: 4rem;
 }
 
-#bankedButton:hover, #nextQuestion:hover
+#bankedButton:hover
 {
     background-color: #237020;
 }

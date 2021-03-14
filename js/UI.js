@@ -8,9 +8,14 @@ const MainUI =
     playerAvatarImg:        document.querySelector(`#playerSelected`),
     timer:                  document.querySelector(`#timerDisplay`),
     roundDisplay:           document.querySelector(`#roundDisplay`),
-    currentBankedAmount:    document.querySelector(`#currentBankedAmount`),
+    currentRoundBankedAmount:    document.querySelector(`#currentBankedAmount`),
     moneyTreeValueDisplay:  document.getElementsByClassName(`moneyTreeValueDisplay`),
-   
+    bankedButton:           document.querySelector(`#bankedButton`),
+    actionButtons:          document.querySelector(`#actionButtons`),
+    bankedBroughtFwd:       document.querySelector(`#bankedAmountBroughtFwd`),
+    
+
+    
     /*  DAO Logic  */
    
     playerImageSelected:    sessionStorage.getItem(`AvatarSelectedImage`),
@@ -21,10 +26,12 @@ const MainUI =
     roundOneMoneyTree: [0,1000,5000,10000,50000,75000,125000,250000,500000],
     roundTwoMoneyTree: [0,1000,10000,750000,125000,500000],
     suddenDeathRound: ["Classic5050.png","ClassicATA.png","ClassicPAF.png"],
-    roundTimer: [60,60], //**fix */
+    roundTimer: [999,60], //**fix */
+    maxBankedPerRound:500000,
     currentRound: 1,
     currentTreeIndex: ``,
-
+    allotedTimeToBank: 1000,
+    totalBankedThisRound: 0,
     correctAnswer:``,
 
     startTimer()
@@ -97,7 +104,7 @@ const MainUI =
 
             answers.sort()
 
-            console.log(questionAndAnswerObj.correctAnswer)
+            console.log(`Answer: ${questionAndAnswerObj.correctAnswer}`)
 
             this.displayAnswerContainer.innerHTML = ``; //Removes Dynamic Answers Previous Created
             this.questionQnAContainer.innerHTML = ``; //Removes Dynamic Answers Previous Created
@@ -116,7 +123,7 @@ const MainUI =
         })
         .catch((Err) => {
 
-            console.log(`Error`)
+            console.log(`API didn't load Err: ${Err}`)
             
         });
 
@@ -166,8 +173,11 @@ const MainUI =
     },
 
     checkAnswers(answer)
-    {     
-        this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `` //**fix
+    {   
+        // console.log(this.currentTreeIndex)
+
+          
+        this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `#0163C3` //**fix
 
         if(answer == true)
         {
@@ -175,20 +185,56 @@ const MainUI =
         }
         else
         {
-            this.currentTreeIndex = this.moneyTreeValueDisplay.length-1;
-            
+            this.currentTreeIndex = this.moneyTreeValueDisplay.length-1;   
         }
-
+        
         this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `green` //**fix
 
     },
 
     bankedFunds()
     {
-        let bankedFundsThisRound = this.moneyTreeValueDisplay[this.currentTreeIndex].innerHTML
-        this.currentBankedAmount.innerHTML += `Banked: ${bankedFundsThisRound}`
+
+        this.currentRoundBankedAmount.innerHTML = `Banked: ${this.totalBankedThisRound}`;
+        let bankedValue = parseInt(this.moneyTreeValueDisplay[this.currentTreeIndex].innerHTML);
+        // console.log(bankedValue)
+        
+        console.log(`Start: ${this.totalBankedThisRound}`)
+
+        this.totalBankedThisRound = (this.totalBankedThisRound + bankedValue)
+
+        console.log(`Banked: ${bankedValue}`)
+        console.log(`Total Banked: ${this.totalBankedThisRound}`)
+
+
+        this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = ``;
+        this.currentRoundBankedAmount.innerHTML = `Banked: ${this.totalBankedThisRound}`
+        this.currentTreeIndex = this.moneyTreeValueDisplay.length-1;
+        this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `green`;
+
+        if(this.totalBankedThisRound >= this.maxBankedPerRound)
+        {
+            this.totalBankedThisRound = 500000;
+            this.currentRound++
+            this.bankedBroughtFwd.innerHTML = `${this.totalBankedThisRound}`
+        }
+
+    },
+
+    displayBankOption()
+    {       
+        this.actionButtons.style.display = `block`
+        this.questionQnAContainer.style.display = `none`
+        this.displayAnswerContainer.style.display = `none`
+
+        setTimeout(() => {
+                
+            this.actionButtons.style.display = `none`
+            this.questionQnAContainer.style.display = `grid`
+            this.displayAnswerContainer.style.display = `grid`
+
+        },this.allotedTimeToBank)
     }
-    
     
 }
 

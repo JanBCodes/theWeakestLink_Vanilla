@@ -1,15 +1,21 @@
+Remember:
+    DRY
+    SOC
+
 Intro:
+
     Music: On/Off
     Save Function
     Load Function
+    Convert other MPA to SPA
 
 Logic:
 
     BLO
     Prevent Duplicate Questions
-    Fix Answer.innerHTML && Obj.annswer Equal from Array
-    Modal Blocking re: Bank or Next
-    Banking Feature
+    Fix Answer.innerHTML && Obj.annswer Equal from Array - *Kadeeem to advise, if not, rip out question and add new question*
+
+    Banking Feature **
 
     Round Two & Sudden Death Protection from Cheating
 
@@ -20,8 +26,7 @@ Logic:
     Winner
     Loser
 
-DRY
-SOC
+/*******************************
     UI - done
     BLO - to work on
     DOA - done
@@ -37,6 +42,9 @@ SOC
     Timer - done
     Money Tree Climb - done
     Answer Selection Verification - done
+    Blocking re: Bank or Next Question - done
+
+
 
 
 
