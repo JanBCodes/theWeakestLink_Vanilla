@@ -2,9 +2,21 @@ Remember:
     DRY
     SOC
 
+/*******************************/
+            UPNEXT GOALS
+/*******************************/
+
+    Banking Feature
+        - Final
+
+    Save Function
+
+
+
+/*******************************/
+
 Intro:
 
-    Music: On/Off
     Save Function
     Load Function
     Convert other MPA to SPA
@@ -15,9 +27,11 @@ Logic:
     Prevent Duplicate Questions
     Fix Answer.innerHTML && Obj.annswer Equal from Array - *Kadeeem to advise, if not, rip out question and add new question*
 
-    Banking Feature **
+    Banking Feature
+    - Current Round* - Done
+    - Final *
 
-    Round Two & Sudden Death Protection from Cheating
+    Round Two & Sudden Death Protection from Cheating - minor
 
     50/50 : wo wrong answers disappear
     Phone a friend: ???
@@ -44,6 +58,7 @@ Logic:
     Answer Selection Verification - done
     Blocking re: Bank or Next Question - done
 
+    Music: On/Off - Event Listener (Not Controls) - Done
 
 
 

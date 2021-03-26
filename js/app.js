@@ -41,6 +41,37 @@ const app =
             
         })
 
+
+        const musicButton = document.querySelector(`#musicOnOff`)
+
+        let musicOnOff = true
+        let sound = new Audio();
+        sound.src = "../audio/questionBed.mp3"
+        sound.oncanplaythrough = () => {
+    
+            sound.readyToPlay = true;
+    
+        }
+    
+        musicButton.addEventListener(`click`, () => {
+    
+            console.log(sound.readyToPlay)
+    
+            if(sound && sound.readyToPlay && musicOnOff) // check for the sound AND if it has loaded AND my flag is TRUE
+            {  
+                sound.currentTime = 20;       // the second I want the audio to start
+                sound.play();                // play the audio I have
+                musicButton.style.backgroundColor = "green" 
+                musicOnOff = false;
+            }
+            else
+            {
+                sound.pause(); 
+                musicButton.style.backgroundColor = "white" 
+                musicOnOff = true
+            }
+        })
+
     }//end of init
 
 };

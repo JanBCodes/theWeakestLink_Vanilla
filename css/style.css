@@ -27,7 +27,7 @@ main
 
 #welcomeBanner
 {
-    background-image: url(../img/WeakestLinkLogo\ -\ BG.webp);
+    background-image: url(https://media.giphy.com/media/LcPiw0vBAK0Mp4NB9B/source.gif);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
@@ -48,17 +48,30 @@ main
 body > main > section 
 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr .5fr;
     justify-self: center;
+    color: var(--all-text);
 }
 
 section > button
 {
     padding: 30px;
     margin : 50px;
-    background-color:#0163C3;
+    background-color: white;
     border: 2px solid #5A82B2;
     border-radius: 15px;
+    font-size: 2rem;
+}
+
+#musicOnOff, #saveGame
+{
+    background-color: white;
+    margin: 50px;
+    padding: 30px;
+}
+
+.fas, .far
+{
     font-size: 2rem;
 }
 
@@ -168,6 +181,10 @@ a
 
 .avatarSelectionButtons
 {
+    background-image: url(../img/L013.gif);
+    background-size: cover;
+    background-position: center center;
+
     background-color: rgb(14, 48, 56);
     border-radius: 50%;
     border: 5px solid var(--all-text);
@@ -176,12 +193,6 @@ a
     width: 95%;
     padding: 25px;
 }
-
-/* .avatarSelectionButtons:hover
-{
-    background-color: #11284d;
-    border: 8px solid var(--all-text);
-} */
 
 #backButton
 {
@@ -203,11 +214,15 @@ a
     display: grid;
     grid-template-rows: 1fr;
 
+    background-image: url(https://media.giphy.com/media/aDIjoiTWStILe82iII/source.gif);
+    background-size: cover; 
 }
 #confirmAvatar > main 
 {
     display: grid;
     grid-template-columns: 1fr 1fr;
+
+
 }
 
 #confirmAvatar > main > div
@@ -238,8 +253,9 @@ a
 #Yes, #No
 {
     background-color:#031c41;
-    border: 2px solid #031c41;
-    border-radius: 15px;
+    border: 2px solid none;
+    border-radius: 15px; 
+    margin-top: 20px;
     justify-self: center;
     font-size: 2rem;
     color: white;
@@ -294,9 +310,12 @@ a
     margin: auto 0;
 }
 
+
 #otherControls > img
 {
+    display: block;
     width: 100%;
+    margin: auto 0;
 }
 
 #otherControls > div > i
@@ -327,6 +346,7 @@ a
 
 #displayQnAContainer
 {
+
     display: grid;
     grid-template-rows: 1fr;
     row-gap: 5px;
@@ -424,10 +444,26 @@ a
 /********************************************************************
         Sudden Death UI
 ********************************************************************/
-
 .suddenDeathLifeLines:hover
 {
     background-color:#0163C3;
 }
 
+.suddenDeathLifeLines
+{
+    display: grid;
+    justify-content: center;
+}
+
+.suddenDeathTracker
+{       
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 5px;
+    margin: 0 auto;
+    background-size: cover;
+    background-color: red;
+    text-align: center;
+
+}
 

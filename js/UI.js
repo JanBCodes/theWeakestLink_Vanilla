@@ -13,9 +13,7 @@ const MainUI =
     bankedButton:           document.querySelector(`#bankedButton`),
     actionButtons:          document.querySelector(`#actionButtons`),
     bankedBroughtFwd:       document.querySelector(`#bankedAmountBroughtFwd`),
-    
-
-    
+       
     /*  DAO Logic  */
    
     playerImageSelected:    sessionStorage.getItem(`AvatarSelectedImage`),
@@ -26,7 +24,7 @@ const MainUI =
     roundOneMoneyTree: [0,1000,5000,10000,50000,75000,125000,250000,500000],
     roundTwoMoneyTree: [0,1000,10000,750000,125000,500000],
     suddenDeathRound: ["Classic5050.png","ClassicATA.png","ClassicPAF.png"],
-    roundTimer: [999,60], //**fix */
+    roundTimer: [45,20], //**fix */
     maxBankedPerRound:500000,
     currentRound: 1,
     currentTreeIndex: ``,
@@ -60,11 +58,20 @@ const MainUI =
             {
                 this.currentRound++;
                 this.timer.innerHTML = ``;
-                this.currentBankedAmount.innerHTML = ``;
+                this.currentBankedAmount.innerHTML = 0;
                 this.roundDisplay.innerHTML = `Round ${this.currentRound}: Sudden Death`
                 this.populateMoneyTree()
                 clearInterval(ref)
             }
+            else if(this.currentRound == 3)
+            {
+                this.timer.innerHTML = ``;
+                this.roundDisplay.innerHTML = `Round ${this.currentRound}: Sudden Death`
+                this.populateMoneyTree()
+                clearInterval(ref)
+
+            }
+
 
         },1000)
     },
@@ -91,9 +98,9 @@ const MainUI =
             }
 
             this.correctAnswer = questionAndAnswerObj.correctAnswer
-            /****************************************
+            /************************************************
             Pushing Answer to Array to be Shuffled for Random display
-            *************************************** */
+            *********************************************** */
             const answers = []
 
             answers.push(questionAndAnswerObj.correctAnswer)  
@@ -106,7 +113,7 @@ const MainUI =
 
             console.log(`Answer: ${questionAndAnswerObj.correctAnswer}`)
 
-            this.displayAnswerContainer.innerHTML = ``; //Removes Dynamic Answers Previous Created
+            this.displayAnswerContainer.innerHTML = ``; //Removes Dynamic Question Previous Created
             this.questionQnAContainer.innerHTML = ``; //Removes Dynamic Answers Previous Created
 
 
@@ -135,6 +142,8 @@ const MainUI =
 
         if(this.currentRound === 1)
         {           
+            this.bankedBroughtFwd.innerHTML = 0;
+
             this.roundOneMoneyTree.reverse().forEach((index) => {
 
                 this.moneyTreeContainer.innerHTML += `<button class="moneyTreeValueDisplay" type="button"> ${index} </button>`
@@ -148,7 +157,8 @@ const MainUI =
         }
         else if(this.currentRound === 2)
         {
-           
+            this.bankedBroughtFwd.innerHTML = this.totalBankedThisRound;
+
             this.roundTwoMoneyTree.reverse().forEach((index) => {
 
                 this.moneyTreeContainer.innerHTML += `<button class="moneyTreeValueDisplay" type="button"> ${index} </button>`
@@ -160,13 +170,22 @@ const MainUI =
             this.currentTreeIndex = moneyTreeValueDisplay.length-1; // = 9
             this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `green` //**fix
 
-
         }
         else if(this.currentRound === 3) // Sudden Death
          {
+
+            // this.moneyTreeContainer.style.gridTemplateColumns = '1fr';
+
+            this.moneyTreeContainer.innerHTML = `<div class="suddenDeathTracker"> 1 </div>
+            <div class="suddenDeathTracker"> 2  </div>
+            <div class="suddenDeathTracker"> 3 </div>
+            <div class="suddenDeathTracker"> 4  </div>
+            <div class="suddenDeathTracker"> 5  </div>`          
+
             this.suddenDeathRound.forEach((index) => {
 
-                this.moneyTreeContainer.innerHTML += `<div class="suddenDeathLifeLines"><img src="../img/${index}" alt="a life line"></div>`
+                this.moneyTreeContainer.innerHTML += `<div class="suddenDeathLifeLines"><img src="../img/${index}" alt="a life line"></div> `
+                                                        
             })
 
          }
@@ -175,7 +194,6 @@ const MainUI =
     checkAnswers(answer)
     {   
         // console.log(this.currentTreeIndex)
-
           
         this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `#0163C3` //**fix
 
@@ -216,8 +234,9 @@ const MainUI =
         {
             this.totalBankedThisRound = 500000;
             this.currentRound++
-            this.bankedBroughtFwd.innerHTML = `${this.totalBankedThisRound}`
+            this.bankedBroughtFwd.innerHTML = `Total Banked ${this.totalBankedThisRound}`
         }
+
 
     },
 

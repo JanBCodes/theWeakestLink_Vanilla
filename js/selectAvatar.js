@@ -14,6 +14,8 @@ const selectAvatar = (() => {
 
     const returnToIndexHTML = document.querySelector(`#backButton`)
     const selectAvatarMainDContainer = document.querySelector(`#selectAvatar`)
+    const musicButton = document.querySelector(`#musicOnOff`)
+
 
 
     AvatarsArr.forEach((index) => {
@@ -45,6 +47,34 @@ const selectAvatar = (() => {
 
         sessionStorage.setItem(`AvatarSelectedImage`,`${avatarImage}`)
         
+    })
+
+    let musicOnOff = true
+    let sound = new Audio();
+    sound.src = "../audio/7444_the_hour_of_reckoning_94_bpm.mp3"
+    sound.oncanplaythrough = () => {
+
+        sound.readyToPlay = true;
+
+    }
+
+    musicButton.addEventListener(`click`, () => {
+
+        console.log(sound.readyToPlay)
+
+        if(sound && sound.readyToPlay && musicOnOff) // check for the sound AND if it has loaded AND my flag is TRUE
+        {  
+            sound.currentTime = 5;       // the second I want the audio to start
+            sound.play();                // play the audio I have
+            musicButton.style.backgroundColor = "green" 
+            musicOnOff = false;
+        }
+        else
+        {
+            sound.pause(); 
+            musicButton.style.backgroundColor = "white" 
+            musicOnOff = true
+        }
     })
 
 

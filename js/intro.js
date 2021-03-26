@@ -6,7 +6,7 @@ const intro =
         // const loadGameButton = document.querySelector(`#loadGame`)
         const rulesButton = document.querySelector(`#gameRules`)
         const displayRules = document.querySelector(`#displayRules`)
-
+        const musicButton = document.querySelector(`#musicOnOff`)
 
         startGameButton.addEventListener(`click`, () => {
             
@@ -46,6 +46,49 @@ const intro =
             displayRules.innerHTML = ``
 
         });
+
+        let musicOnOff = true
+        let sound = new Audio();
+        sound.src = "../TheWeakestLink/audio/openingTitle.mp3" 
+        sound.oncanplaythrough = () => {
+
+            sound.readyToPlay = true;
+
+        }
+
+        musicButton.addEventListener(`click`, () => {
+
+            console.log(sound.readyToPlay)
+
+            if(sound && sound.readyToPlay && musicOnOff) // check for the sound AND if it has loaded AND my flag is TRUE
+            {  
+                sound.currentTime = 5;       // the second I want the audio to start
+                sound.play();                // play the audio I have
+                musicButton.style.backgroundColor = "green" 
+                musicOnOff = false;
+            }
+            else
+            {
+                sound.pause(); 
+                musicButton.style.backgroundColor = "white" 
+                musicOnOff = true
+            }
+        })
+
+            // var sound = new Audio();         // create the audio
+            // sound.src = "SoundFileURL.mp3";  // set the resource location 
+            // sound.oncanplaythrough = function(){   // When the sound has completely loaded
+            // sound.readyToRock = true;    // flag sound is ready to play
+            //                         // I just made it up and can be anything
+            // };
+            // sound.onerror = function(){      // not required but if there are problems this will help debug the problem
+            // console.log("Sound file SoundFileURL.mp3 failed to load.")
+            // };
+
+
+
+
+
 
     } //end of Main
 

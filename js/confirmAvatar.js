@@ -5,7 +5,7 @@ const confirmAvatar =
         const avatarSelDisplayDiv = document.querySelector(`#avatarSelected`)
         const moveOntoRoundOne = document.querySelector(`#Yes`)
         const returnToAvatarSel = document.querySelector(`#No`)
-
+        const musicButton = document.querySelector(`#musicOnOff`)
         const playerImageSelected = sessionStorage.getItem(`AvatarSelectedImage`)
 
         console.log(playerImageSelected)
@@ -48,6 +48,36 @@ const confirmAvatar =
             location.href = `/TheWeakestLink/html/selectAvatar.html`
 
         })
+
+        
+    let musicOnOff = true
+    let sound = new Audio();
+    sound.src = "../audio/7444_the_hour_of_reckoning_94_bpm.mp3"
+    sound.oncanplaythrough = () => {
+
+        sound.readyToPlay = true;
+
+    }
+
+    musicButton.addEventListener(`click`, () => {
+
+        console.log(sound.readyToPlay)
+
+        if(sound && sound.readyToPlay && musicOnOff) // check for the sound AND if it has loaded AND my flag is TRUE
+        {  
+            sound.currentTime = 5;       // the second I want the audio to start
+            sound.loop = true;           // I've set the Audio to this so I can continously play
+            sound.play();                // play the audio I have
+            musicButton.style.backgroundColor = "green" 
+            musicOnOff = false;
+        }
+        else
+        {
+            sound.pause(); 
+            musicButton.style.backgroundColor = "white" 
+            musicOnOff = true
+        }
+    })
             
     }  //end of confirmAvatar
 }

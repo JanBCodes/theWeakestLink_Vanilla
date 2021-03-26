@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300&display=swap" rel="stylesheet"> 
     <script src="https://kit.fontawesome.com/fc385cc442.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <script defer src="../js/app.js" type="module"></script>
+
     <title> The Weakest Link || Game Screen </title>
 </head>
 <body id="gameScreenContainer">
@@ -16,10 +18,18 @@
 
         <section id="otherControls">
             <img src="../img/TWL Banner.jpg" alt="the Weakest Link Banner">
-            <div id="saveGame"> Save Game <i class="far fa-save"></i> </div>
+
+            <button type="button" id="musicOnOff">
+                <i class="fas fa-music"> 
+                </i>
+            </button> 
             <div id="bankedAmountBroughtFwd"> bankedAmountBroughtFwd $0 </div>
-            <div id="musicOnOff"> Music On/Off <i class="fas fa-music"></i></div>
-        </section>
+            <button type="button" id="saveGame">
+                <i class="far fa-save">
+                </i>
+            </button> 
+
+        </section> 
 
         <div id="moneyTreeContainer"> </div>
 
@@ -41,10 +51,9 @@
     </main>
     <footer>
         Developed by: JanBCodes 
-        <a href="https://github.com/JanBCodes">
+        <a href="https://github.com/JanBCodes" type="_blank">
             <i class="fab fa-github"></i>
         </a>
     </footer>
-<script src="../js/app.js" type="module"></script>
 </body>
 </html>
