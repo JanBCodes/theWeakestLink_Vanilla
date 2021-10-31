@@ -15,7 +15,7 @@ const confirmAvatar =
 
             sessionStorage.removeItem(`AvatarSelectedImage`)
  
-            avatarSelDisplayDiv.style.backgroundImage = `url(/TheWeakestLink/img/404Error.png)`
+            avatarSelDisplayDiv.style.backgroundImage = `url(./img/404Error.png)`
 
             moveOntoRoundOne.addEventListener(`click`,() => {
 
@@ -24,7 +24,7 @@ const confirmAvatar =
 
                 setTimeout(() => {
 
-                    location.href = `/TheWeakestLink/html/selectAvatar.html`
+                    location.href = `/html/selectAvatar.html`
                 }, 3000)
             })
 
@@ -35,7 +35,7 @@ const confirmAvatar =
 
             moveOntoRoundOne.addEventListener(`click`,() => {
 
-                location.href = `/TheWeakestLink/html/gameScreen.html`
+                location.href = `/html/gameScreen.html`
     
             })
 
@@ -45,7 +45,7 @@ const confirmAvatar =
 
             sessionStorage.removeItem(`AvatarSelectedImage`)
 
-            location.href = `/TheWeakestLink/html/selectAvatar.html`
+            location.href = `/html/selectAvatar.html`
 
         })
 

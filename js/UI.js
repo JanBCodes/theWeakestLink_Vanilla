@@ -1,4 +1,5 @@
-import RESTAPI from "./DAO.js"
+import { RESTAPI } from './DAO.js'
+import businessRules from './BLO.js'
 
 const MainUI =
 {
@@ -13,28 +14,36 @@ const MainUI =
     bankedButton:           document.querySelector(`#bankedButton`),
     actionButtons:          document.querySelector(`#actionButtons`),
     bankedBroughtFwd:       document.querySelector(`#bankedAmountBroughtFwd`),
+
+    totalBankedThisRound: 0,
+    correctAnswer:``,
+    currentRound: 1,
+    currentTreeIndex: ``,
+
        
     /*  DAO Logic  */
    
     playerImageSelected:    sessionStorage.getItem(`AvatarSelectedImage`),
 
     /*  Business Logic     */
-    endPoint: `https://opentdb.com/api.php?amount=50&category=9&difficulty=easy&type=multiple`,
+/*  endPoint: `https://opentdb.com/api.php?amount=50&category=9&difficulty=easy&type=multiple`,
     randomQuestionNumber: Math.floor(Math.random() * 50), 
     roundOneMoneyTree: [0,1000,5000,10000,50000,75000,125000,250000,500000],
     roundTwoMoneyTree: [0,1000,10000,750000,125000,500000],
     suddenDeathRound: ["Classic5050.png","ClassicATA.png","ClassicPAF.png"],
-    roundTimer: [45,20], //**fix */
+    roundTimer: [45,20], 
     maxBankedPerRound:500000,
-    currentRound: 1,
-    currentTreeIndex: ``,
     allotedTimeToBank: 1000,
+
     totalBankedThisRound: 0,
     correctAnswer:``,
+    currentRound: 1,
+    currentTreeIndex: ``,
+ */
 
     startTimer()
     {
-        let currentTimer = this.roundTimer[0];
+        let currentTimer = businessRules.roundTimer[0];
 
         this.roundDisplay.innerHTML = `Round ${this.currentRound}`
 
@@ -51,7 +60,7 @@ const MainUI =
             {
                 this.currentRound++;
                 this.roundDisplay.innerHTML = `Round ${this.currentRound}`
-                currentTimer = this.roundTimer[1]
+                currentTimer = businessRules.roundTimer[1]
                 this.populateMoneyTree()
             }
             else if(this.currentRound == 2 && currentTimer == 0 || this.currentTreeIndex == -1 && this.currentRound == 2)
@@ -86,15 +95,15 @@ const MainUI =
 
         const newQuestion  = new RESTAPI()
 
-        newQuestion.getAPIData(this.endPoint)
+        newQuestion.getAPIData(businessRules.endPoint)
 
         .then((data) => {
 
             const questionAndAnswerObj = {
 
-                question: data.results[this.randomQuestionNumber].question,
-                correctAnswer: data.results[this.randomQuestionNumber].correct_answer,
-                incorrectAnswers: data.results[this.randomQuestionNumber].incorrect_answers //array
+                question: data.results[businessRules.randomQuestionNumber].question,
+                correctAnswer: data.results[businessRules.randomQuestionNumber].correct_answer,
+                incorrectAnswers: data.results[businessRules.randomQuestionNumber].incorrect_answers //array
             }
 
             this.correctAnswer = questionAndAnswerObj.correctAnswer
@@ -144,7 +153,7 @@ const MainUI =
         {           
             this.bankedBroughtFwd.innerHTML = 0;
 
-            this.roundOneMoneyTree.reverse().forEach((index) => {
+            businessRules.roundOneMoneyTree.reverse().forEach((index) => {
 
                 this.moneyTreeContainer.innerHTML += `<button class="moneyTreeValueDisplay" type="button"> ${index} </button>`
             })
@@ -159,7 +168,7 @@ const MainUI =
         {
             this.bankedBroughtFwd.innerHTML = this.totalBankedThisRound;
 
-            this.roundTwoMoneyTree.reverse().forEach((index) => {
+            businessRules.roundTwoMoneyTree.reverse().forEach((index) => {
 
                 this.moneyTreeContainer.innerHTML += `<button class="moneyTreeValueDisplay" type="button"> ${index} </button>`
 
@@ -176,13 +185,13 @@ const MainUI =
 
             // this.moneyTreeContainer.style.gridTemplateColumns = '1fr';
 
-            this.moneyTreeContainer.innerHTML = `<div class="suddenDeathTracker"> 1 </div>
-            <div class="suddenDeathTracker"> 2  </div>
-            <div class="suddenDeathTracker"> 3 </div>
-            <div class="suddenDeathTracker"> 4  </div>
-            <div class="suddenDeathTracker"> 5  </div>`          
+            // this.moneyTreeContainer.innerHTML = `<div class="suddenDeathTracker"> 1 </div>
+            // <div class="suddenDeathTracker"> 2  </div>
+            // <div class="suddenDeathTracker"> 3 </div>
+            // <div class="suddenDeathTracker"> 4  </div>
+            // <div class="suddenDeathTracker"> 5  </div>`          
 
-            this.suddenDeathRound.forEach((index) => {
+            businessRules.suddenDeathRound.forEach((index) => {
 
                 this.moneyTreeContainer.innerHTML += `<div class="suddenDeathLifeLines"><img src="../img/${index}" alt="a life line"></div> `
                                                         
@@ -195,7 +204,7 @@ const MainUI =
     {   
         // console.log(this.currentTreeIndex)
           
-        this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `#0163C3` //**fix
+        this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `black` //**fix
 
         if(answer == true)
         {
@@ -230,7 +239,7 @@ const MainUI =
         this.currentTreeIndex = this.moneyTreeValueDisplay.length-1;
         this.moneyTreeValueDisplay[this.currentTreeIndex].style.backgroundColor = `green`;
 
-        if(this.totalBankedThisRound >= this.maxBankedPerRound)
+        if(this.totalBankedThisRound >= businessRules.maxBankedPerRound)
         {
             this.totalBankedThisRound = 500000;
             this.currentRound++
@@ -252,7 +261,7 @@ const MainUI =
             this.questionQnAContainer.style.display = `grid`
             this.displayAnswerContainer.style.display = `grid`
 
-        },this.allotedTimeToBank)
+        },businessRules.allotedTimeToBank)
     }
     
 }

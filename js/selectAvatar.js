@@ -1,16 +1,16 @@
-import Avatars from "./DAO2.js"
+import { Avatars } from "./DAO.js"
 
 // ()=>
 const selectAvatar = (() => {
 
     const AvatarsArr = []
 
-    AvatarsArr.push(new Avatars("avatar1","Cindy.png","Cindy")); 
-    AvatarsArr.push(new Avatars("avatar2","David.png","David"));
-    AvatarsArr.push(new Avatars("avatar3","Helen.png","Helen")); 
-    AvatarsArr.push(new Avatars("avatar4","Joan.png","Joan"));
-    AvatarsArr.push(new Avatars("avatar5","stacy.png","Stacy"));
-    AvatarsArr.push(new Avatars("avatar6","Tiffany.png","Tiffany"));
+    AvatarsArr.push(new Avatars("avatar1","Birdman.png","Birdman","none")); 
+    AvatarsArr.push(new Avatars("avatar2","Nicki.png","Nicki","none"));
+    AvatarsArr.push(new Avatars("avatar3","Drake.png","Drake", "none")); 
+    AvatarsArr.push(new Avatars("avatar4","Cardi.png","Cardi","none"));
+    AvatarsArr.push(new Avatars("avatar5","Wayne.png","Wayne","none"));
+    AvatarsArr.push(new Avatars("avatar6","Megan.png","Megan","none"));
 
     const returnToIndexHTML = document.querySelector(`#backButton`)
     const selectAvatarMainDContainer = document.querySelector(`#selectAvatar`)
@@ -32,7 +32,7 @@ const selectAvatar = (() => {
    
     returnToIndexHTML.addEventListener(`click`, () => {
         
-        location.href = `/TheWeakestLink/index.html`
+        location.href = `/index.html`
 
     });
 
@@ -43,7 +43,7 @@ const selectAvatar = (() => {
         console.log(avatarImage)
 
 
-        location.href = `/TheWeakestLink/html/confirmAvatar.html`
+        location.href = `/html/confirmAvatar.html`
 
         sessionStorage.setItem(`AvatarSelectedImage`,`${avatarImage}`)
         
@@ -72,7 +72,7 @@ const selectAvatar = (() => {
         else
         {
             sound.pause(); 
-            musicButton.style.backgroundColor = "white" 
+            musicButton.style.backgroundColor = "WHITE" 
             musicOnOff = true
         }
     })

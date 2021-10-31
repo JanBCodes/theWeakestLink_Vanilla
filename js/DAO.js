@@ -20,4 +20,23 @@ class RESTAPI
     }
 }
 
-export default RESTAPI;
+class Avatars
+{
+    id;
+    image;
+    name;
+    color;
+
+    constructor(n,p,d,c)
+    {
+        this.id=n;
+        this.image=p;
+        this.name = d;
+        this.color = c;
+    }
+}
+
+// export default Avatars;
+// export default RESTAPI;
+
+export { RESTAPI, Avatars}

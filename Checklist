@@ -3,7 +3,7 @@ Remember:
     SOC
 
 /*******************************/
-            UPNEXT GOALS
+        UPNEXT 
 /*******************************/
 
     Banking Feature
@@ -11,8 +11,8 @@ Remember:
 
     Save Function
 
-
-
+/*******************************/
+        TO DO
 /*******************************/
 
 Intro:
@@ -28,7 +28,6 @@ Logic:
     Fix Answer.innerHTML && Obj.annswer Equal from Array - *Kadeeem to advise, if not, rip out question and add new question*
 
     Banking Feature
-    - Current Round* - Done
     - Final *
 
     Round Two & Sudden Death Protection from Cheating - minor
@@ -40,7 +39,9 @@ Logic:
     Winner
     Loser
 
-/*******************************
+/*******************************/
+        COMPLETED
+/*******************************/
     UI - done
     BLO - to work on
     DOA - done
@@ -59,6 +60,9 @@ Logic:
     Blocking re: Bank or Next Question - done
 
     Music: On/Off - Event Listener (Not Controls) - Done
+
+    Current Round Banking - Done
+
 
 
 
